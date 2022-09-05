@@ -2,7 +2,7 @@
 [![npm version](https://img.shields.io/npm/v/wagmi-lfg?colorA=21262d&colorB=161b22&style=flat)](https://www.npmjs.com/package/wagmi-lfg)
 [![GitHub license](https://img.shields.io/github/license/jonathangus/wagmi-lfg?colorA=21262d&colorB=161b22&style=flat&label=License)](https://github.com/jonathangus/wagmi-lfg/blob/main/LICENSE)
 
-A wrapper to typesafe [wagmi](https://github.com/wagmi-dev/wagmi)'s `useContractRead` and `useContractWrite` with types coming from [@typechain/hardhat](https://github.com/dethcrypto/TypeChain/tree/master/packages/hardhat).
+A wrapper to typesafe [wagmi](https://github.com/wagmi-dev/wagmi)'s `useContractRead` and `useContractWrite` using [@typechain/hardhat](https://github.com/dethcrypto/TypeChain/tree/master/packages/hardhat).
 
 ## Installation
 
