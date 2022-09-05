@@ -1,4 +1,89 @@
-# TSDX React User Guide
+# Wagmi 🤝 Typechain = LFG
+
+A wrapper for wagmi `useContractRead` and `useContractWrite` to make read and write function typesafe with types coming from hardhat-typechain.
+
+## Installation
+
+### app.tsx
+
+```
+import { configureChains, createClient, WagmiConfig } from 'wagmi';
+import { LFGProvider } from 'wagmi-lfg';
+
+const { chains, provider } = configureChains(...);
+const { connectors } = getDefaultWallets({
+  chains,
+  appName: '...',
+});
+
+const wagmiClient = createClient({
+  connectors,
+  provider,
+});
+
+const App = ({ children }) => {
+  // Use your own notification library
+  const showNotice = useNotice();
+
+  return (
+    <WagmiConfig client={wagmiClient}>
+        <LFGProvider
+          notice={({ status, message }) =>
+            showNotice({ status, message })
+          }
+          resolveAddress={(contractName, chainId) =>
+            {/* resolve addresses depending on contract name and chain. Good to config with hardhat-deploy */}
+            getAddress(contractName, chainId)
+          }
+          fallbackChain={config.fallbackId}
+        >
+          {children}
+        </LFGProvider>
+    </WagmiConfig>
+  );
+};
+
+export default App;
+```
+
+### read
+```
+// works
+const { data, error } = useContractRead(ERC20_factory, 'getBalance', {
+  args: [userAddress],
+});
+
+// fails
+const { data, error } = useContractRead(ERC20_factory, 'getBalance1', {
+  args: [userAddress],
+});
+
+const { data, error } = useContractRead(ERC20_factory, 'getBalance1', {
+  args: [userAddress, wrongParam],
+});
+
+```
+
+### write
+
+```
+// works
+const { data, error } = useContractWrite(ERC20_factory, 'approve', {
+  args: [userAddress, amount],
+});
+
+// fails
+const { data, error } = useContractWrite(ERC20_factory, 'approve1', {
+  args: [userAddress, amount],
+});
+
+const { data, error } = useContractWrite(ERC20_factory, 'approve', {
+  args: [userAddress],
+});
+```
+
+
+
 
 Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
 
