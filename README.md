@@ -1,12 +1,18 @@
-# Wagmi 🤝 Typechain = LFG
+# Wagmi 🤝 Typechain = LFG 
+[![npm version](https://img.shields.io/npm/v/wagmi-lfg?colorA=21262d&colorB=161b22&style=flat)](https://www.npmjs.com/package/wagmi-lfg)
+[![GitHub license](https://img.shields.io/github/license/jonathangus/wagmi-lfg?colorA=21262d&colorB=161b22&style=flat&label=License)](https://github.com/jonathangus/wagmi-lfg/blob/main/LICENSE)
 
-A wrapper for wagmi `useContractRead` and `useContractWrite` to make read and write function typesafe with types coming from hardhat-typechain.
+A wrapper to typesafe [wagmi](https://github.com/wagmi-dev/wagmi)'s `useContractRead` and `useContractWrite` with types coming from [@typechain/hardhat](https://github.com/dethcrypto/TypeChain/tree/master/packages/hardhat).
 
 ## Installation
 
+```bash
+npm install wagmi-lfg
+```
+
 ### app.tsx
 
-```
+```ts
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { LFGProvider } from 'wagmi-lfg';
 
@@ -47,7 +53,7 @@ export default App;
 ```
 
 ### read
-```
+```ts
 // works
 const { data, error } = useContractRead(ERC20_factory, 'getBalance', {
   args: [userAddress],
@@ -66,7 +72,7 @@ const { data, error } = useContractRead(ERC20_factory, 'getBalance1', {
 
 ### write
 
-```
+```ts
 // works
 const { data, error } = useContractWrite(ERC20_factory, 'approve', {
   args: [userAddress, amount],
@@ -174,7 +180,7 @@ Two actions are added by default:
 
 Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
 
-```js
+```ts
 // ./types/index.d.ts
 declare var __DEV__: boolean;
 
